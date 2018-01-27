@@ -14,7 +14,7 @@ jobs:
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
-            - node_modules
+            - ./node_modules
   echo_version:
     docker:
       - image: circleci/node:7.10
@@ -24,10 +24,15 @@ jobs:
           name: echo npm version
           command: npm -v
   lint_one:
+    working_directory: ~/mern-starter
     docker:
       - image: circleci/node:7.10
     steps:
       - checkout
+      - run:
+          name: check
+          command: |
+            ls -l
       - run:
           name: check test1.js lint
           command: npm run lint1
