@@ -9,6 +9,7 @@ jobs:
       - run:
           name: Install npm
           command: npm install
+
   echo_version:
     docker:
       - image: circleci/node:7.10
@@ -17,17 +18,21 @@ jobs:
       - run:
           name: echo npm version
           command: npm -v
+
   lint1:
     docker:
       - image: circleci/node:7.10
+    working_directory: ~/repo
     steps:
       - checkout
       - run:
           name: check test1.js lint
           command: npm run lint1
+
   lint2:
     docker:
       - image: circleci/node:7.10
+    working_directory: ~/repo
     steps:
       - checkout
       - run:
@@ -39,9 +44,7 @@ workflows:
   build_and_lint:
     jobs:
       - build
-      - echo_version:
-        requires:
-          - build
+      - echo_version
       - lint1:
         requires:
           - build
