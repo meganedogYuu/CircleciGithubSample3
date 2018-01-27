@@ -37,6 +37,3 @@ workflows:
     jobs:
       - build
       - echo_version
-      - lint_one:
-        requires:
-          - build
