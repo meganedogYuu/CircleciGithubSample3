@@ -10,17 +10,23 @@ jobs:
           name: Install npm
           command: npm install
   echo_version:
+    docker:
+      - image: circleci/node:7.10
     steps:
       - checkout
       - run:
           name: echo npm version
           command: npm -v
   lint1:
+    docker:
+      - image: circleci/node:7.10
     steps:
       - run:
           name: check test1.js lint
           command: npm run lint1
   lint2:
+    docker:
+      - image: circleci/node:7.10
     steps:
       - run:
           name: check test2.js lint
