@@ -38,3 +38,5 @@ workflows:
     jobs:
       - build
       - echo_version
+      - lint1
+      - lint2
