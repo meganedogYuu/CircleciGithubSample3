@@ -34,10 +34,12 @@ jobs:
 
 workflows:
   version: 2
-  build_and_echo_version:
+  build_and_lint:
     jobs:
       - build
-      - echo_version
+      - echo_version:
+        requires:
+          - build
       - lint1:
         requires:
           - build
