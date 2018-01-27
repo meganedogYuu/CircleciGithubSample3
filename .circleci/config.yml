@@ -9,10 +9,6 @@ jobs:
       - run:
           name: Install npm
           command: npm install
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - node_modules
   echo_version:
     docker:
       - image: circleci/node:7.10
@@ -42,5 +38,9 @@ workflows:
     jobs:
       - build
       - echo_version
-      - lint1
-      - lint2
+      - lint1:
+        requires:
+          - build
+      - lint2:
+        requires:
+          - build
