@@ -19,7 +19,7 @@ jobs:
           name: echo npm version
           command: npm -v
 
-  lint1:
+  lint_one:
     docker:
       - image: circleci/node:7.10
     working_directory: ~/repo
@@ -29,7 +29,7 @@ jobs:
           name: check test1.js lint
           command: npm run lint1
 
-  lint2:
+  lint_two:
     docker:
       - image: circleci/node:7.10
     working_directory: ~/repo
@@ -45,9 +45,6 @@ workflows:
     jobs:
       - build
       - echo_version
-      - lint1:
-        requires:
-          - build
-      - lint2:
+      - lint_one:
         requires:
           - build
