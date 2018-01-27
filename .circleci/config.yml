@@ -1,11 +1,14 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/mern-starter
     docker:
       - image: circleci/node:7.10
-    working_directory: ~/repo
     steps:
       - checkout
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
@@ -26,7 +29,6 @@ jobs:
   lint_one:
     docker:
       - image: circleci/node:7.10
-    working_directory: ~/repo
     steps:
       - checkout
       - run:
