@@ -9,6 +9,10 @@ jobs:
       - run:
           name: Install npm
           command: npm install
+       - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
   echo_version:
     docker:
       - image: circleci/node:7.10
