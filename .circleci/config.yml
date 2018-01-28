@@ -49,6 +49,23 @@ jobs:
           name: check test2.js lint
           command: npm run lint2
 
+  hold:
+    working_directory: ~/mern-starter
+    docker:
+      - image: circleci/node:7.10
+    steps:
+      - run:
+          name: hold
+          command: echo approve?
+
+  deploy:
+    working_directory: ~/mern-starter
+    docker:
+      - image: circleci/node:7.10
+    steps:
+      - run:
+          name: deploy
+          command: echo deploy
 
 workflows:
   version: 2
@@ -62,3 +79,11 @@ workflows:
       - lint2:
           requires:
             - build
+      - hold:
+          type: approval
+          requires:
+            - lint1
+            - lint2
+      - deploy:
+          requires:
+            - hold
