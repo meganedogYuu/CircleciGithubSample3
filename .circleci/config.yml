@@ -7,19 +7,15 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: node_modules
       - run:
           name: Install npm
           command: npm install
-      - run:
-          name: check
-          command: |
-            pwd
-            ls -la
       - save_cache:
           key: node_modules
           paths:
             - node_modules
+
   echo_version:
     docker:
       - image: circleci/node:7.10
@@ -28,6 +24,7 @@ jobs:
       - run:
           name: echo npm version
           command: npm -v
+
   lint1:
     working_directory: ~/mern-starter
     docker:
@@ -37,13 +34,9 @@ jobs:
       - restore_cache:
           key: node_modules
       - run:
-          name: check
-          command: |
-            pwd
-            ls -la
-      - run:
           name: check test1.js lint
           command: npm run lint1
+
   lint2:
     working_directory: ~/mern-starter
     docker:
@@ -53,13 +46,9 @@ jobs:
       - restore_cache:
           key: node_modules
       - run:
-          name: check
-          command: |
-            pwd
-            ls -la
-      - run:
           name: check test2.js lint
           command: npm run lint2
+
 
 workflows:
   version: 2
