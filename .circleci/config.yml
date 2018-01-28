@@ -13,7 +13,9 @@ jobs:
           command: npm install
       - run:
           name: check
-          command: ls -la
+          command: |
+            pwd
+            ls -la
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -37,6 +39,7 @@ jobs:
       - run:
           name: check
           command: |
+            pwd
             ls -la
       - run:
           name: check test1.js lint
