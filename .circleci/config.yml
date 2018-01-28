@@ -55,10 +55,12 @@ workflows:
   build_and_lint:
     jobs:
       - build
-      - echo_version
-      - lint1:
+      - echo_version:
           requires:
             - build
+      - lint1:
+          requires:
+            - echo_version
       - lint2:
           requires:
             - lint1
