@@ -28,7 +28,7 @@ jobs:
       - run:
           name: echo npm version
           command: npm -v
-  lint_one:
+  lint1:
     working_directory: ~/mern-starter
     docker:
       - image: circleci/node:7.10
@@ -44,6 +44,22 @@ jobs:
       - run:
           name: check test1.js lint
           command: npm run lint1
+  lint2:
+    working_directory: ~/mern-starter
+    docker:
+      - image: circleci/node:7.10
+    steps:
+      - checkout
+      - restore_cache:
+          key: node_modules
+      - run:
+          name: check
+          command: |
+            pwd
+            ls -la
+      - run:
+          name: check test2.js lint
+          command: npm run lint2
 
 workflows:
   version: 2
@@ -51,6 +67,9 @@ workflows:
     jobs:
       - build
       - echo_version
-      - lint_one:
+      - lint1:
           requires:
             - build
+      - lint2:
+          requires:
+            - lint1
