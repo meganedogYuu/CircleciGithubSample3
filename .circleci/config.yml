@@ -16,9 +16,9 @@ jobs:
             pwd
             ls -la
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: node
           paths:
-            - ./node_modules
+            - node_modules
   echo_version:
     machine: true
     steps:
@@ -30,8 +30,9 @@ jobs:
     working_directory: ~/mern-starter
     machine: true
     steps:
+      - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: node
       - run:
           name: check
           command: |
