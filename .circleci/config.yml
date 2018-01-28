@@ -84,6 +84,9 @@ workflows:
           requires:
             - lint1
             - lint2
+          filters:
+            branches:
+              only: master
       - deploy:
           requires:
             - hold
