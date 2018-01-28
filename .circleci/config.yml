@@ -16,7 +16,7 @@ jobs:
             pwd
             ls -la
       - save_cache:
-          key: node
+          key: node_modules
           paths:
             - node_modules
   echo_version:
@@ -32,7 +32,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: node
+          key: node_modules
       - run:
           name: check
           command: |
