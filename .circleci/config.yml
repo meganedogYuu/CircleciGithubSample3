@@ -2,8 +2,7 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
-    docker:
-      - image: circleci/node:7.10
+    machine: true
     steps:
       - checkout
       - restore_cache:
@@ -21,8 +20,7 @@ jobs:
           paths:
             - ./node_modules
   echo_version:
-    docker:
-      - image: circleci/node:7.10
+    machine: true
     steps:
       - checkout
       - run:
@@ -30,10 +28,8 @@ jobs:
           command: npm -v
   lint_one:
     working_directory: ~/mern-starter
-    docker:
-      - image: circleci/node:7.10
+    machine: true
     steps:
-      - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
